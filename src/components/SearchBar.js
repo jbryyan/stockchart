@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { FormGroup, InputGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, ControlLabel, Button, Row } from 'react-bootstrap';
 import  apiSearch from '../functions/apiQuandl.js';
 
 class SearchBar extends Component {
@@ -31,7 +31,7 @@ class SearchBar extends Component {
   render() {
 
     return (
-      <div>
+      <Row>
         <form onSubmit={(e) => this.handleSearch(e)} ref={input => this.form = input}>
         <FormGroup>
           <ControlLabel>Enter stock code to chart data</ControlLabel>
@@ -43,7 +43,7 @@ class SearchBar extends Component {
           </InputGroup>
         </FormGroup>
         </form>
-      </div>
+      </Row>
     );
   }
 }

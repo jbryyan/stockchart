@@ -10,6 +10,7 @@ class App extends Component {
   
   constructor(){
     super();
+    document.body.style = 'background: #444444';
     this.updateStocks = this.updateStocks.bind(this);
     this.state = {
       stocks: [],
@@ -33,8 +34,8 @@ class App extends Component {
     return (
       <div>
         <Grid>
-          <Jumbotron style={{textAlign: 'center'}}>
-            <h3>Stock Market Graph</h3>
+          <Jumbotron style={{textAlign: 'center', backgroundColor: '#2A2A2B'}}>
+            <h3 style={{color: 'white'}}>Stock Market Graph</h3>
             <StockChart stockData={this.state.stocks} />
             <ListOfStocks stockData={this.state.stockCodes}/>
             <SearchBar updateStocks={this.updateStocks}/>

@@ -1,11 +1,11 @@
-
-import Chart from 'chart.js';
+var default_colors = ['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477','#66AA00','#B82E2E','#316395',
+'#994499','#22AA99','#AAAA11','#6633CC','#E67300','#8B0707','#329262','#5574A6','#3B3EAC'];
 
 const updateDatasets = (nextProps) => {
   console.log("In update datasets function"); 
   let totalDatasets = [];
   //Loop through nextprops array
-  nextProps.stockData.forEach(e => {
+  nextProps.stockData.forEach((e, index) => {
     //Grab the stock name
     let label = Object.keys(e)[0];
     let dataset = [];
@@ -19,7 +19,10 @@ const updateDatasets = (nextProps) => {
     totalDatasets.push({
       label: label,
       data: dataset,
-      fill: false
+      fill: false,
+      borderColor: default_colors[index],
+      backgroundColor: default_colors[index],
+      pointRadius: 0
     });
   });
   console.log(totalDatasets);
@@ -27,7 +30,7 @@ const updateDatasets = (nextProps) => {
   return (totalDatasets);
 };
 
-const chartSetup = (ctx, nextProps) => {
+const chartSetup = (nextProps) => {
 
   let labels = [];
   let stockName = '';// startDate = '', endDate = '';
@@ -50,58 +53,7 @@ const chartSetup = (ctx, nextProps) => {
   }
   //Returns chart
   return ( 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: datasets
-      }, 
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              stepSize: 10,
-              min: 0,
-              max: 200
-            }
-          }]
-        },
-        responsive: true,
-        elements: { 
-          point: { 
-            radius: 0,
-            hitRadius: 10, 
-            hoverRadius: 5,
-          } 
-        },
-        tooltips: {
-          mode: 'index',
-          intersect: false
-        }
-      },
-      plugins: [{
-        afterDatasetsDraw: function(chart) {
-          if (chart.tooltip._active && chart.tooltip._active.length) {
-             var activePoint = chart.tooltip._active[0],
-                 ctx = chart.ctx,
-                 y_axis = chart.scales['y-axis-0'],
-                 x = activePoint.tooltipPosition().x,
-                 topY = y_axis.top,
-                 bottomY = y_axis.bottom;
-             // draw line
-             ctx.save();
-             ctx.beginPath();
-             ctx.moveTo(x, topY);
-             ctx.lineTo(x, bottomY);
-             ctx.lineWidth = 2;
-             ctx.strokeStyle = '#07C';
-             ctx.stroke();
-             ctx.restore();
-          }
-       }
-      }],
-    })
+    { labels: labels, datasets: datasets }
   );
 }
 

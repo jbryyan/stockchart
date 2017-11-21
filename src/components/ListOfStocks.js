@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Button } from 'react-bootstrap';
 
 class ListOfStocks extends Component {
   
   render() {
 
     return (
-		<div>
-			<Row>
-				<Col md={3}>MM1</Col>
-				<Col md={3}>MM2</Col>
-				<Col md={3}>MM3</Col>
-				<Col md={3}>MM4</Col>
-			</Row>
-			<Row>
-				<Col md={3}>MM1</Col>
-				<Col md={3}>MM2</Col>
-				<Col md={3}>MM3</Col>
-			  <Col md={3}>MM4</Col>
-			</Row>
-    </div>
+  
+      <Row>
+      {
+        this.props.stockData.map((e, index) => 
+          <Col style={{backgroundColor: 'white', margin: '10px', height: '30px'}} md={2} sm={2} xs={2} key={index}>
+            <a href={`http://www.nasdaq.com/symbol/${e}`}>{e}</a><Button/>
+          </Col>
+        )
+      }
+      </Row>
+  
     );
   }
 }
