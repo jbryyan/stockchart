@@ -1,14 +1,15 @@
-const io = require('socket.io')();
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(3001);
 
 io.on('connection', (client) => {
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
+  client.on('subscribeToTimer', () => {
+    console.log('client is subscribing to timer with interval 1s');
     setInterval(() => {
       client.emit('timer', new Date());
-    }, interval);
+    }, 1000);
   });
 });
 
-const port = 8000;
-io.listen(port);
-console.log('listening on port ', port);

@@ -4,7 +4,13 @@ import {Line} from 'react-chartjs-2';
 import { Row } from 'react-bootstrap';
 class StockChart extends Component {
 
-
+  constructor(){
+    super();
+    this.state = {
+      data: null
+    };
+  }
+  
   componentWillMount() {
     const dataSet = {
       labels: [],
@@ -17,8 +23,12 @@ class StockChart extends Component {
   }
   
   componentWillReceiveProps(nextProps){
-    //console.log(nextProps);
-    this.updateCanvas(nextProps);
+    console.log("In will receive props stockChart.js");
+    console.log(nextProps);
+    if(nextProps){
+      this.updateCanvas(nextProps);
+    }
+    //this.updateCanvas(nextProps);
   }
 
   updateCanvas(nextProps) {

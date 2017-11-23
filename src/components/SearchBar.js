@@ -22,7 +22,8 @@ class SearchBar extends Component {
       apiSearch(this.textInput.value)
         .then(result => {
           //localStorage.setItem('Stock_Data', JSON.stringify(result));
-          this.props.updateStocks(result, this.textInput.value)
+          console.log(result);
+          //this.props.updateStocks(result, this.textInput.value)
         })  //Updating stocks data in main app component
         .catch(error => console.log(error));
     //}

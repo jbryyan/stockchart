@@ -6,6 +6,9 @@ import ListOfStocks from './ListOfStocks';
 import SearchBar    from './SearchBar';
 import { Grid, Jumbotron } from 'react-bootstrap';
 
+import subscribeToTimer from '../functions/api';
+import Request from 'superagent';
+
 class App extends Component {
   
   constructor(){
@@ -18,6 +21,17 @@ class App extends Component {
     };
   }
 
+  componentDidMount(){
+    subscribeToTimer((err, data, stockCodes) => {
+      this.updateStocks(data, stockCodes);
+    });
+
+    
+  }
+
+
+
+  /*
   updateStocks(data, stockCode){
     //Copy states to update.
     let stocks = [...this.state.stocks];
@@ -27,6 +41,14 @@ class App extends Component {
     stockCodes.push(stockCode);
     //Update state
     this.setState({ stocks: stocks, stockCodes: stockCodes});
+  }
+  */
+  updateStocks(data){
+    console.log("in updateStocks");
+    console.log(data);
+    let stocks = data[0];
+    let stockCodes = data[1];
+    this.setState({ stocks , stockCodes });
   }
 
   render() {
@@ -40,6 +62,7 @@ class App extends Component {
             <ListOfStocks stockData={this.state.stockCodes}/>
             <SearchBar updateStocks={this.updateStocks}/>
           </Jumbotron>
+          <div>Timestamp: {this.state.timestamp} </div>
         </Grid>
       </div>
     );

@@ -31,13 +31,13 @@ const updateDatasets = (nextProps) => {
 };
 
 const chartSetup = (nextProps) => {
-
+  console.log("In chartsetup.js");
   let labels = [];
   let stockName = '';// startDate = '', endDate = '';
   let testDatasets = null;
   let datasets = null;
- 
-  if(nextProps){
+  console.log(nextProps);
+  if(nextProps.stockData.length){
     console.log("In chart setup");
     console.log(nextProps.stockData);
     //Update variables needed to update chart according to props.
