@@ -5,7 +5,8 @@
 //Created: 11/20/2017, last edit: Bryan 11/24/2017
 
 import React, { Component } from 'react';
-import { Col, Row,  Glyphicon } from 'react-bootstrap';
+import { Col, Row, Glyphicon } from 'react-bootstrap';
+import Request from 'superagent';
 
 class ListOfStocks extends Component {
   //Handle delete will delete the stock from the server, 
